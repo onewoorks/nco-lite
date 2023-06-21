@@ -1,0 +1,71 @@
+
+<table class="table table-bordered table-sm-08">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Line</th>
+      <th>Ac State</th>
+      <th>Status Surveillance</th>
+      <th>Mission Capable</th>
+      <th>Total HH:MM</th>
+      <th>0001</th>
+      <th>0100</th>
+      <th>0200</th>
+      <th>0300</th>
+      <th>0400</th>
+      <th>0500</th>
+      <th>0600</th>
+      <th>0700</th>
+      <th>0800</th>
+      <th>0900</th>
+      <th>1000</th>
+      <th>1100</th>
+      <th>1200</th>
+      <th>1300</th>
+      <th>1400</th>
+      <th>1500</th>
+      <th>1600</th>
+      <th>1700</th>
+      <th>1800</th>
+      <th>1900</th>
+      <th>2000</th>
+      <th>2100</th>
+      <th>2200</th>
+      <th>2300</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of reportData; let i = index">
+      <td>{{ item.report_date | date: 'dd/MM/yyyy' }}</td>
+      <td>{{ item.data['0000'][0].line}}</td>
+      <td>{{ item.data['0000'][0].ac_state}}</td>
+      <td>{{ item.data['0000'][0].status_survlance}}</td>
+      <td>{{ item.data['0000'][0].mission_capable}}</td>
+      <td></td>
+      <td>{{ item.data['0000'][0].minutes}}</td>
+      <td>{{ item.data['0100'][0].minutes}}</td>
+      <td>{{ item.data['0200'][0].minutes}}</td>
+      <td>{{ item.data['0300'][0].minutes}}</td>
+      <td>{{ item.data['0400'][0].minutes}}</td>
+      <td>{{ item.data['0500'][0].minutes}}</td>
+      <td>{{ item.data['0600'][0].minutes}}</td>
+      <td>{{ item.data['0700'][0].minutes}}</td>
+      <td>{{ item.data['0800'][0].minutes}}</td>
+      <td>{{ item.data['0900'][0].minutes}}</td>
+      <td>{{ item.data['1000'][0].minutes}}</td>
+      <td>{{ item.data['1100'][0].minutes}}</td>
+      <td>{{ item.data['1200'][0].minutes}}</td>
+      <td>{{ item.data['1300'][0].minutes}}</td>
+      <td>{{ item.data['1400'][0].minutes}}</td>
+      <td>{{ item.data['1500'][0].minutes}}</td>
+      <td>{{ item.data['1600'][0].minutes}}</td>
+      <td>{{ item.data['1700'][0].minutes}}</td>
+      <td>{{ item.data['1800'][0].minutes}}</td>
+      <td>{{ item.data['1900'][0].minutes}}</td>
+      <td>{{ item.data['2000'][0].minutes}}</td>
+      <td>{{ item.data['2100'][0].minutes}}</td>
+      <td>{{ item.data['2200'][0].minutes}}</td>
+      <td>{{ item.data['2300'][0].minutes}}</td>
+    </tr>
+  </tbody>
+</table>

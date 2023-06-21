@@ -1,0 +1,12 @@
+<div *ngIf="AircraftTypes.length <= 0">No Data</div>
+<div *ngIf="AircraftTypes.length > 0">
+  <div class="row">
+    <div *ngFor="let aircraftType of AircraftTypes; let i = index" class="col-lg-3 text-center">
+      <div class="card mb-2 inventory-type">
+        <div class="card-body">
+          <div (click)="pickItem(aircraftType.kategoriName)">{{ aircraftType.kategoriName }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<form>
+  <div class="row mb-2">
+    <label for="line" class="col-sm-5 col-form-label">Line</label>
+    <div class="col-sm-7">
+      <select class="form-select" id="line">
+        <option *ngFor="let line of selectLine">{{ line.description }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label for="ac_state" class="col-sm-5 col-form-label">Ac State</label>
+    <div class="col-sm-7">
+      <select class="form-select" id="ac_state">
+        <option *ngFor="let acState of selectAcState">{{ acState.description }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label for="status_surveillance" class="col-sm-5 col-form-label">Status Surveillance</label>
+    <div class="col-sm-7">
+      <select class="form-select" id="status_surveillance">
+        <option *ngFor="let statusSurveillance of selectStatusSurveillance">{{ statusSurveillance.description }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label for="mission_capable" class="col-sm-5 col-form-label">Mission Capable</label>
+    <div class="col-sm-7">
+      <select class="form-select" id="mission_capable">
+        <option *ngFor="let missionCapable of selectMissionCapable">{{ missionCapable.abbr }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label for="duration" class="col-sm-5 col-form-label">Duration</label>
+    <div class="col-sm-7">
+      <div class="input-group">
+        <input type="number" class="form-control" id="duration"/>
+        <span class="input-group-text">minutes</span>
+      </div>
+      
+    </div>
+  </div>
+</form>

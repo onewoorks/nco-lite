@@ -1,0 +1,16 @@
+<div *ngIf="inventoryDetail">
+  <table>
+    <tbody>
+      <tr>
+        <th>Tail Number :</th>
+        <th>{{ inventoryDetail.tail_number }}</th>
+        <th>Squadron :</th>
+        <th>{{ inventoryDetail.squadron }}</th>
+        <th>Airbase :</th>
+        <th>{{ inventoryDetail.pengkalan }}</th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-detail [inventory_id]="inventory_id"></app-detail>

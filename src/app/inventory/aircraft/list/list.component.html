@@ -1,0 +1,30 @@
+<div *ngIf="!inventory_id">
+  <table class="table table-bordered table-sm">
+    <thead>
+      <tr>
+        <th class='text-center'>Tail Number</th>
+        <th class='text-center'>Aircraft Type</th>
+        <th class='text-center'>Line</th>
+        <th class='text-center'>Ac State(Serv/IS)</th>
+        <th class='text-center'>Status Surveillance</th>
+        <th class='text-center'>Update Record</th>
+        <th class='text-center'>Report Monthly</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of listItems; let i = index">
+        <td class="text-center">{{ item.tail_number }}</td>
+        <td class="text-center">{{ item.kategori_asset }}</td>
+        <td>{{ item.markas }}</td>
+        <td>{{ item.pangkalan }}</td>
+        <td>{{ item.squadron }}</td>
+        <td class="text-center">
+          <div class="btn btn-primary btn-sm" (click)="addReport(item._id)">Add Report</div></td>
+        <td class="text-center">
+          <div class='btn btn-primary btn-sm' (click)="itemReport(item._id)">View</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-report [inventory_id]="inventory_id"></app-report>

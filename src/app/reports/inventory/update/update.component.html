@@ -1,0 +1,51 @@
+<div>
+      <div class="row">
+        <div class="col-8">
+          <div class="card">
+            <div class="card-body">
+              <table class="table table-bordered table-sm text-center">
+                <thead>
+                  <tr>
+                    <th>Time</th>
+                    <th>Line</th>
+                    <th>Ac State</th>
+                    <th>Status Surveillance</th>
+                    <th>Mission Capable</th>
+                    <th>Action</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let field of dailyFields; let i = index" >
+                    <td>{{ field.time }}</td>
+                    <td>{{ field.line }}</td>
+                    <td>{{ field.ac_state }}</td>
+                    <td>{{ field.status_surveillance }}</td>
+                    <td>{{ field.mission_capable }}</td>
+                    <td class="text-center">
+                      <div class="btn btn-primary btn-sm">Update</div> 
+                    </td>
+                    <td>
+                      <div class="btn btn-outline-secondary btn-sm">Add</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+        </div>
+        <div class="col-4">
+          <div class="card">
+            <div class="card-body">
+              <app-form></app-form>
+            </div>
+          </div>
+
+          <div class="d-grid mt-2">
+            <div (click)="updateReport(inventory_id)" class="btn btn-primary">Update Report</div>
+          </div>
+
+          
+        </div>
+</div>

@@ -1,0 +1,10 @@
+.table-sm {
+    font-size: 0.9rem
+}
+.table-sm-08{
+    font-size: 0.7rem
+}
+
+.inventory-type:hover {
+    cursor: pointer;
+}
