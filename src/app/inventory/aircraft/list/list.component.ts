@@ -14,11 +14,11 @@ export class ListComponent implements OnInit {
   }
 
 
-  addReport(id){
-    window.location.href = `reports/inventory/update/${id}`
+  addReport(id: string){
+    window.location.href = `reports/inventory/draft/${id}`
   }
 
-  itemReport(id){
+  itemReport(id: string){
     window.location.href = `reports/inventory/aircraft/${id}`
   }
 

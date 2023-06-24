@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-bordered table-sm text-center">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>0000</th>
+              <th>0100</th>
+              <th>0200</th>
+              <th>0300</th>
+              <th>0400</th>
+              <th>0500</th>
+              <th>0600</th>
+              <th>0700</th>
+              <th>0800</th>
+              <th>0900</th>
+              <th>1000</th>
+              <th>1100</th>
+              <th>1200</th>
+              <th>1300</th>
+              <th>1400</th>
+              <th>1500</th>
+              <th>1600</th>
+              <th>1700</th>
+              <th>1800</th>
+              <th>1900</th>
+              <th>2000</th>
+              <th>2100</th>
+              <th>2200</th>
+              <th>2300</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let draft of draftReport; let i = index">
+              <td>{{ draft.report_date | date }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{{ draft.status}}</td>
+              <td>
+                <div class="btn btn-primary btn-sm" (click)="updateReport(draft._id)">Update</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

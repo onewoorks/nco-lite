@@ -13,7 +13,6 @@ export class RefsService {
   constructor(private http: HttpClient) {}
 
   getList(source: string, mode: string){
-    console.log('ready to submit')
     return this.http.get(`${this.baseUri}/refs/inventory-types/${source}/${mode}`)
   }
 

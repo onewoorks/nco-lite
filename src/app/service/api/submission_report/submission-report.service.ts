@@ -6,23 +6,25 @@ import { HttpClient,HttpHeaders,HttpErrorResponse } from '@angular/common/http'
 @Injectable({
   providedIn: 'root'
 })
-export class SubmissionService {
+export class ApiSubmissionReportService {
   baseUri: string = 'http://localhost:8000/api'
   headers = new HttpHeaders().set('Content-Type', 'application/json')
 
   constructor(private http: HttpClient) {}
 
-  addSubmission(inventory_id){
-    // return this.http.post(`${this.baseUri}/daily-report-submission/inventory/${inventory_id}`)
+  getDraftReportInventory(id: string){
+    return this.http.get(`${this.baseUri}/report/submission/draft/inventory/${id}`)
+  } 
+
+  getDraftReport(id: string){
+    return this.http.get(`${this.baseUri}/report/submission/draft/${id}`)
   }
 
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
-      // Get client-side error
       errorMessage = error.error.message;
     } else {
-      // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
     console.log(errorMessage);

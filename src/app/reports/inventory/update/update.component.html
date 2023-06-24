@@ -1,51 +1,57 @@
-<div>
-      <div class="row">
-        <div class="col-8">
-          <div class="card">
-            <div class="card-body">
-              <table class="table table-bordered table-sm text-center">
-                <thead>
-                  <tr>
-                    <th>Time</th>
-                    <th>Line</th>
-                    <th>Ac State</th>
-                    <th>Status Surveillance</th>
-                    <th>Mission Capable</th>
-                    <th>Action</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let field of dailyFields; let i = index" >
-                    <td>{{ field.time }}</td>
-                    <td>{{ field.line }}</td>
-                    <td>{{ field.ac_state }}</td>
-                    <td>{{ field.status_surveillance }}</td>
-                    <td>{{ field.mission_capable }}</td>
-                    <td class="text-center">
-                      <div class="btn btn-primary btn-sm">Update</div> 
-                    </td>
-                    <td>
-                      <div class="btn btn-outline-secondary btn-sm">Add</div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          
+<div *ngIf="dailyFields">
+  <div class="row">
+    <div class="col-8">
+      <div class="card">
+        <div class="card-body">
+          <table class="table table-bordered table-sm text-center">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Line</th>
+                <th>Ac State</th>
+                <th>Status Surveillance</th>
+                <th>Mission Capable</th>
+                <th>Duration</th>
+                <th>Action</th>
+                <th>Add Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let time of dailyFields.data; let i = index">
+                <tr *ngFor="let hour of time.data; let a = index">
+                  <td *ngIf="a === 0" [attr.rowspan]="time.data.length">{{ time.time }}</td>
+                  <td>{{ hour.line }}</td>
+                  <td>{{ hour.ac_state }}</td>
+                  <td>{{ hour.status_surveillance }}</td>
+                  <td>{{ hour.mission_capable }}</td>
+                  <td>{{ hour.minutes }}</td>
+                  <td>
+                    <div class="btn-group">
+                      <div class='btn btn-warning btn-sm' (click)="editRowStatus(time.time)">
+                        <i class="bi bi-pencil"></i>
+                      </div>
+                      <div class='btn btn-danger btn-sm' (click)="deleteRowHour(hour, time.time)">
+                        <i class="bi bi-trash"></i>
+                      </div>
+                    </div>
+                    
+                  </td>
+                  <td *ngIf="a === 0" [attr.rowspan]=time.data.length>
+                    <div class="btn btn-success btn-sm" (click)="addNewRowHour(time)">
+                      <i class="bi bi-plus-circle"></i>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+            
+          </table>
         </div>
-        <div class="col-4">
-          <div class="card">
-            <div class="card-body">
-              <app-form></app-form>
-            </div>
-          </div>
+      </div>
 
-          <div class="d-grid mt-2">
-            <div (click)="updateReport(inventory_id)" class="btn btn-primary">Update Report</div>
-          </div>
+    </div>
+    <div class="col-4">
+      <app-form></app-form>
+    </div>
+  </div>
 
-          
-        </div>
-</div>
