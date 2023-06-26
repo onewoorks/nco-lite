@@ -1,5 +1,5 @@
-<div *ngIf="!inventory_id">
-  <table class="table table-bordered table-sm">
+<div *ngIf="!inventory_id" class="mt-4">
+  <table class="table table-bordered table-sm text-center table-nco table-striped">
     <thead>
       <tr>
         <th class='text-center'>Tail Number</th>
@@ -19,9 +19,9 @@
         <td>{{ item.pangkalan }}</td>
         <td>{{ item.squadron }}</td>
         <td class="text-center">
-          <div class="btn btn-primary btn-sm" (click)="addReport(item._id)">Add Report</div></td>
+          <div class="btn btn-primary btn-sm btn-nco" (click)="addReport(item._id)">Add Report</div></td>
         <td class="text-center">
-          <div class='btn btn-primary btn-sm' (click)="itemReport(item._id)">View</div>
+          <div class='btn btn-primary btn-sm btn-nco' (click)="itemReport(item._id)">View</div>
         </td>
       </tr>
     </tbody>

@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap');
+
+body {
+    background-color: #222831;
+    /* font-family: 'Nunito Sans', sans-serif; */
+}
+
 .table-sm {
     font-size: 0.9rem
 }
@@ -5,12 +12,49 @@
     font-size: 0.7rem
 }
 
+.table-nco {
+    font-size:0.7rem;
+    color: #fff;
+    border: 1px solid #666
+}
+
+.table-nco > thead th {
+    background-color: #555555;
+    color: #fff;
+}
+
+.table-nco th, .table-nco td {
+    padding: 2px
+}
+
+.table-nco td.text-lime {
+    color: lime
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #aaaaaa;
+    color: #fff
+} 
+.table-striped>tbody>tr:nth-of-type(even) {
+    background-color: #7f7f7f;
+}
+
 .inventory-type:hover {
     cursor: pointer;
 }
 
+.text-capitalize {
+    text-transform: capitalize;
+}
 
-.material-icons.md-14 { font-size: 14px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+.btn-nco {
+    padding: 3px 6px;
+    line-height: 1;
+    font-size: 0.7rem
+}
+
+.btn-primary { 
+    background-color: #FFD369;
+    color: #000;
+    border-color: #FFD369;
+}

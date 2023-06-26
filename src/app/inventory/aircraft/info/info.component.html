@@ -1,0 +1,19 @@
+<ng-container *ngIf="inventoryDetail">
+  <div class="card mb-3">
+    <div class="card-body">
+      <table class="table table-bordered table-sm mb-0">
+        <tbody>
+          <tr>
+            <th>Tail Number</th>
+            <td>{{ inventoryDetail.tail_number}}</td>
+            <th>Squadron</th>
+            <td>{{ inventoryDetail.squadron}}</td>
+            <th>Airbase</th>
+            <td>{{ inventoryDetail.pengkalan }} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-container>
+

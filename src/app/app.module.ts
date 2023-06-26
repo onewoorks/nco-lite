@@ -15,6 +15,7 @@ import { ReportComponent } from './inventory/aircraft/report/report.component';
 import { ReportInventoryUpdateComponent } from './reports/inventory/update/update.component';
 import { FormComponent } from './reports/inventory/update/form/form.component';
 import { ReportInventoryDraftComponent } from './reports/inventory/draft/draft.component';
+import { InfoComponent } from './inventory/aircraft/info/info.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ReportInventoryDraftComponent } from './reports/inventory/draft/draft.c
     ReportComponent,
     ReportInventoryUpdateComponent,
     FormComponent,
-    ReportInventoryDraftComponent
+    ReportInventoryDraftComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,

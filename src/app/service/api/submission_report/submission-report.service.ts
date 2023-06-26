@@ -20,6 +20,21 @@ export class ApiSubmissionReportService {
     return this.http.get(`${this.baseUri}/report/submission/draft/${id}`)
   }
 
+  updateReport(report: Object){
+    const body = report
+    return this.http.put(`${this.baseUri}/report/submission/update`, body).subscribe()
+  }
+
+  seacrhReportByDate(inventoryId: String, dateStart: String, dateEnd: String){
+    console.log(inventoryId)
+    const body = {
+      inventory_id: inventoryId,
+      date_start: dateStart,
+      date_end: dateEnd,
+    }
+    return this.http.post(`${this.baseUri}/report/submission/search-and-update`, body)
+  }
+
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

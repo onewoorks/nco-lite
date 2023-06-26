@@ -1,3 +1,4 @@
+<app-info [inventoryDetail]="inventoryDetail"></app-info>
 <div *ngIf="dailyFields">
   <div class="row">
     <div class="col-8">
@@ -27,17 +28,17 @@
                   <td>{{ hour.minutes }}</td>
                   <td>
                     <div class="btn-group">
-                      <div class='btn btn-warning btn-sm' (click)="editRowStatus(time.time)">
+                      <div class='btn btn-warning btn-sm btn-nco' (click)="editRowStatus(time.time, hour, i, hour.order)">
                         <i class="bi bi-pencil"></i>
                       </div>
-                      <div class='btn btn-danger btn-sm' (click)="deleteRowHour(hour, time.time)">
+                      <div class='btn btn-danger btn-sm btn-nco' (click)="deleteRowHour(hour, time.time)">
                         <i class="bi bi-trash"></i>
                       </div>
                     </div>
                     
                   </td>
                   <td *ngIf="a === 0" [attr.rowspan]=time.data.length>
-                    <div class="btn btn-success btn-sm" (click)="addNewRowHour(time)">
+                    <div class="btn btn-success btn-sm btn-nco" (click)="addNewRowHour(time)">
                       <i class="bi bi-plus-circle"></i>
                     </div>
                   </td>
@@ -51,7 +52,18 @@
 
     </div>
     <div class="col-4">
-      <app-form></app-form>
-    </div>
-  </div>
+      <app-form 
+        [draftId]="draftId" 
+        [draftTime]="draftTime" 
+        [draftTimeData]="draftTimeData"
+        [reportData]="dailyFields"
+        (updateReportData)="updateData($event)"
+        ></app-form>
 
+      <div class="d-grid mt-3">
+        <div class="d-grid mt-2">
+          <div (click)="submitReport()" class="btn btn-primary">Submit Report</div>
+        </div>
+      </div>
+    </div>    
+  </div>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RefsService } from 'src/app/service/api/refs.service'
+import { NgForm, FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -7,13 +8,24 @@ import { RefsService } from 'src/app/service/api/refs.service'
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
+  @Input() draftId: string
+  @Input() draftTime: string
+  @Input() draftTimeData: Object
+  @Input() reportData: any
+  @Output() updateReportData = new EventEmitter<any>();
   selectLine: any = []
   selectAcState: any = []
   selectStatusSurveillance: any = []
   selectMissionCapable: any = []
+  inventoryFormat: any[]
+  selectedValueData: any
+  timeDataStatusForm: FormGroup
+
+
 
   constructor(
-    private apiRefsService: RefsService
+    private apiRefsService: RefsService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -21,6 +33,47 @@ export class FormComponent implements OnInit {
     this.getSelectAcState()
     this.getSelectStatusSurveillance()
     this.getSelectMissionCapable()
+
+    this.timeDataStatusForm = this.formBuilder.group({
+      line: [null],
+      ac_state: [null],
+      mission_capable: [null],
+      status_surveillance: [null],
+      minutes: 0
+    })
+  }
+
+  ngOnChanges(changes){
+    this.setDataToArray(changes.draftTimeData)
+  }
+
+  setFormValues(data){
+    this.timeDataStatusForm = this.formBuilder.group({
+      line: data.line,
+      ac_state: data.ac_state,
+      status_surveillance: data.status_surveillance,
+      mission_capable: data.mission_capable,
+      minutes: data.minutes,
+    })
+  }
+
+  setDataToArray(data){
+    let statusItems = data.currentValue
+    let statusData  = []
+    if(typeof statusItems !== 'undefined'){
+      this.setFormValues(statusItems)
+      for (const key in statusItems) {
+        if (statusItems.hasOwnProperty(key)) {
+          statusData.push({
+            status: key.toString().replace("_"," "),
+            value: statusItems[key]
+          })
+        }
+      }
+      this.inventoryFormat = statusData
+      this.selectedValueData = statusItems
+    }
+    
   }
 
   getSelectLine(){
@@ -47,4 +100,9 @@ export class FormComponent implements OnInit {
     })
   }
 
+  timeStatusData(statusName, value){
+    let statusData          = this.selectedValueData
+    statusData[statusName]  = value
+    this.updateReportData.emit()
+  }
 }

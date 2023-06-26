@@ -1,27 +1,48 @@
+<div class="card d-none">
+  <div class="card-body">
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th style="width: 180px;">Time</th>
+          <td>{{ draftTime }}</td>
+        </tr>
+        <ng-container *ngFor="let invStatus of inventoryFormat">
+          <tr>
+            <th class="text-capitalize">{{ invStatus.status }}</th>
+            <td>{{ invStatus.value }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <div class="card">
   <div class="card-body">
-    <form>
+    <form [formGroup]="timeDataStatusForm">
       <div class="row mb-2">
         <label for="line" class="col-sm-5 col-form-label">Line</label>
         <div class="col-sm-7">
-          <select class="form-select" id="line">
-            <option *ngFor="let line of selectLine">{{ line.description }}</option>
+          <select formControlName="line" #line class="form-select" id="line" (change)="timeStatusData('line',line.value)">
+            <option *ngFor="let line of selectLine;" [value]="line.description">{{ line.description }}</option>
           </select>
         </div>
       </div>
       <div class="row mb-2">
         <label for="ac_state" class="col-sm-5 col-form-label">Ac State</label>
         <div class="col-sm-7">
-          <select class="form-select" id="ac_state">
-            <option *ngFor="let acState of selectAcState">{{ acState.description }}</option>
+          <select formControlName="ac_state" #acState class="form-select" id="ac_state" (change)="timeStatusData('ac_state',acState.value)">
+            <option *ngFor="let acState of selectAcState" [value]="acState.abbr">{{ acState.description }}</option>
           </select>
         </div>
       </div>
       <div class="row mb-2">
         <label for="status_surveillance" class="col-sm-5 col-form-label">Status Surveillance</label>
         <div class="col-sm-7">
-          <select class="form-select" id="status_surveillance">
-            <option *ngFor="let statusSurveillance of selectStatusSurveillance">{{ statusSurveillance.description }}
+          <select formControlName="status_surveillance" #statusSurveillance class="form-select" id="status_surveillance" (change)="timeStatusData('status_surveillance',statusSurveillance.value)">
+            <option 
+            *ngFor="let statusSurveillance of selectStatusSurveillance"
+            >{{ statusSurveillance.description }}
             </option>
           </select>
         </div>
@@ -29,16 +50,16 @@
       <div class="row mb-2">
         <label for="mission_capable" class="col-sm-5 col-form-label">Mission Capable</label>
         <div class="col-sm-7">
-          <select class="form-select" id="mission_capable">
+          <select formControlName="mission_capable" #missionCapable class="form-select" id="mission_capable" (change)="timeStatusData('mission_capable', missionCapable.value)">
             <option *ngFor="let missionCapable of selectMissionCapable">{{ missionCapable.abbr }}</option>
           </select>
         </div>
       </div>
       <div class="row mb-2">
-        <label for="duration" class="col-sm-5 col-form-label">Duration</label>
+        <label for="duration" class="col-sm-5 col-form-label" >Duration</label>
         <div class="col-sm-7">
           <div class="input-group">
-            <input type="number" class="form-control" id="duration" />
+            <input formControlName="minutes" #minutes type="number" class="form-control" id="minutes" (keyup)="timeStatusData('minutes', minutes.value)" />
             <span class="input-group-text">minutes</span>
           </div>
 
@@ -46,8 +67,4 @@
       </div>
     </form>
   </div>
-</div>
-
-<div class="d-grid mt-3">
-  <div (click)="updateReport(inventory_id)" class="btn btn-primary">Update Report</div>
 </div>
