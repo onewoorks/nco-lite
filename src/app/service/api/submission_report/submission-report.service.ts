@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient,HttpHeaders,HttpErrorResponse } from '@angular/common/http'
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiSubmissionReportService {
-  baseUri: string = 'http://localhost:8000/api'
+  baseUri: string =  environment.appApiUrl
   headers = new HttpHeaders().set('Content-Type', 'application/json')
 
   constructor(private http: HttpClient) {}
@@ -26,7 +27,6 @@ export class ApiSubmissionReportService {
   }
 
   seacrhReportByDate(inventoryId: String, dateStart: String, dateEnd: String){
-    console.log(inventoryId)
     const body = {
       inventory_id: inventoryId,
       date_start: dateStart,

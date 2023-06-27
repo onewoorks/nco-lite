@@ -20,7 +20,6 @@ export class ReportInventoryAircraftComponent implements OnInit {
   getInventoryDetail(){
     this.apiService.getAircraftById(this.inventory_id).subscribe((data)=>{
       this.inventoryDetail = data
-      console.log(data)
     })
   }
 
