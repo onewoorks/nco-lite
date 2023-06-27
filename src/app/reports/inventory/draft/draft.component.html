@@ -4,6 +4,9 @@
     <table class="table table-bordered table-sm text-center table-nco table-striped">
       <thead>
         <tr>
+          <th colspan="32">{{ theDate | date: 'MMMM yyyy' }}</th>
+        </tr>
+        <tr>
           <th>Date</th>
           <th>Line</th>
           <th>Ac State</th>
@@ -42,13 +45,18 @@
         <ng-container *ngFor="let draft of draftReport; let i = index">
           <tr *ngFor="let a of draft.data; let ai = index">
             <td *ngIf="ai === 0" [attr.rowspan]="draft.data.length">{{ draft.report_date | date }}</td>
-            <td>{{ a.line }}</td>
-            <td>{{ a.ac_state }}</td>
-            <td>{{ a.status_surveillance }}</td>
-            <td>{{ a.mission_capable }}</td>
-            <td>{{ a.total_hours }}</td>
-            <ng-container *ngFor="let c of a.hour; let ci = index">
-              <td class='text-lime'>{{ c[a.order] }}</td>
+            <td class="text-uppercase">{{ a.line_code_detail.line }}</td>
+            <td>{{ a.line_code_detail.ac_state }}</td>
+            <td>{{ a.line_code_detail.status_surveillance }}</td>
+            <td>{{ a.line_code_detail.mission_capable }}</td>
+            <td>{{ a.total_hours }}
+
+              {{ a.hourly | sum:'minutes'}}
+            </td>
+            <ng-container *ngFor="let c of a.hourly; let ci = index">
+              <td class='text-lime'>
+                <ng-container *ngIf="c.minutes > 0">{{ c.minutes }}</ng-container>
+              </td>
             </ng-container>
             <td *ngIf="ai === 0" [attr.rowspan]="draft.data.length">{{ draft.status }}</td>
             <td *ngIf="ai === 0" [attr.rowspan]="draft.data.length">

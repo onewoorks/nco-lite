@@ -16,6 +16,7 @@ import { ReportInventoryUpdateComponent } from './reports/inventory/update/updat
 import { FormComponent } from './reports/inventory/update/form/form.component';
 import { ReportInventoryDraftComponent } from './reports/inventory/draft/draft.component';
 import { InfoComponent } from './inventory/aircraft/info/info.component';
+import { SumPipeModule } from './pipe/sum.pipe';
 
 @NgModule({
   declarations: [
@@ -36,9 +37,10 @@ import { InfoComponent } from './inventory/aircraft/info/info.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SumPipeModule
   ],
-  providers: [ApiService],
+  providers: [ApiService,SumPipeModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

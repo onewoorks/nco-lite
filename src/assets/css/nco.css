@@ -2,7 +2,13 @@
 
 body {
     background-color: #222831;
+    font-size: 12px;
     /* font-family: 'Nunito Sans', sans-serif; */
+}
+
+.top-hero {
+    background-color: #393646;
+    color: #fff !important
 }
 
 .table-sm {
@@ -57,4 +63,52 @@ body {
     background-color: #FFD369;
     color: #000;
     border-color: #FFD369;
+}
+
+.table-border-none {
+    border:none !important;
+    color: #fff
+}
+
+
+.table>:not(caption)>*>* {
+    border-bottom-width: 0px;
+}
+
+.card-nco {
+    background-color: #393646;
+    color: #fff;
+}
+
+.card-inventory-type {
+    background-color: #393E46;
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-info {
+    background-color: #F96D00;
+    border-color: #F96D00
+}
+
+.btn-info:hover {
+    background-color: #F5B553;
+    border-color: #F5B553
+}
+
+.navbar-nco {
+background-color: #23120B
+}
+
+.topmenu {
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    margin-bottom: 40px;
+    left:0;
+    height: 60px;
+}
+
+a {
+    color: #fff
 }

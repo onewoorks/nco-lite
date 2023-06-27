@@ -17,13 +17,13 @@
   </div>
 </div>
 
-<div class="card">
+<div class="card card-nco">
   <div class="card-body">
     <form [formGroup]="timeDataStatusForm">
       <div class="row mb-2">
         <label for="line" class="col-sm-5 col-form-label">Line</label>
         <div class="col-sm-7">
-          <select formControlName="line" #line class="form-select" id="line" (change)="timeStatusData('line',line.value)">
+          <select formControlName="line" #line class="form-select form-select-sm" id="line" (change)="timeStatusData('line',line.value)">
             <option *ngFor="let line of selectLine;" [value]="line.description">{{ line.description }}</option>
           </select>
         </div>
@@ -31,7 +31,7 @@
       <div class="row mb-2">
         <label for="ac_state" class="col-sm-5 col-form-label">Ac State</label>
         <div class="col-sm-7">
-          <select formControlName="ac_state" #acState class="form-select" id="ac_state" (change)="timeStatusData('ac_state',acState.value)">
+          <select formControlName="ac_state" #acState class="form-select form-select-sm" id="ac_state" (change)="timeStatusData('ac_state',acState.value)">
             <option *ngFor="let acState of selectAcState" [value]="acState.abbr">{{ acState.description }}</option>
           </select>
         </div>
@@ -39,7 +39,7 @@
       <div class="row mb-2">
         <label for="status_surveillance" class="col-sm-5 col-form-label">Status Surveillance</label>
         <div class="col-sm-7">
-          <select formControlName="status_surveillance" #statusSurveillance class="form-select" id="status_surveillance" (change)="timeStatusData('status_surveillance',statusSurveillance.value)">
+          <select formControlName="status_surveillance" #statusSurveillance class="form-select form-select-sm" id="status_surveillance" (change)="timeStatusData('status_surveillance',statusSurveillance.value)">
             <option 
             *ngFor="let statusSurveillance of selectStatusSurveillance"
             >{{ statusSurveillance.description }}
@@ -50,7 +50,7 @@
       <div class="row mb-2">
         <label for="mission_capable" class="col-sm-5 col-form-label">Mission Capable</label>
         <div class="col-sm-7">
-          <select formControlName="mission_capable" #missionCapable class="form-select" id="mission_capable" (change)="timeStatusData('mission_capable', missionCapable.value)">
+          <select formControlName="mission_capable" #missionCapable class="form-select form-select-sm" id="mission_capable" (change)="timeStatusData('mission_capable', missionCapable.value)">
             <option *ngFor="let missionCapable of selectMissionCapable">{{ missionCapable.abbr }}</option>
           </select>
         </div>
@@ -58,8 +58,8 @@
       <div class="row mb-2">
         <label for="duration" class="col-sm-5 col-form-label" >Duration</label>
         <div class="col-sm-7">
-          <div class="input-group">
-            <input formControlName="minutes" #minutes type="number" class="form-control" id="minutes" (keyup)="timeStatusData('minutes', minutes.value)" />
+          <div class="input-group input-group-sm">
+            <input formControlName="minutes" #minutes type="number" class="form-control form-control-sm" id="minutes" (keyup)="timeStatusData('minutes', minutes.value)" />
             <span class="input-group-text">minutes</span>
           </div>
 

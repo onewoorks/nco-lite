@@ -2,16 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiSubmissionReportService } from 'src/app/service/api/submission_report/submission-report.service'
 import { ApiService } from 'src/app/service/api.service';
+import { SumPipe } from 'src/app/pipe/sum.pipe';
 
 @Component({
   selector: 'app-draft',
   templateUrl: './draft.component.html',
   styleUrls: ['./draft.component.css']
 })
-export class ReportInventoryDraftComponent implements OnInit {
+
+
+export class ReportInventoryDraftComponent implements OnInit { 
   inventory_id: string;
   draftReport: any = [];
   inventoryDetail: any
+  theDate = new Date();
+
+  transform(items: any, attr: string): any {
+    let totalhour = items.reduce((a, b) => a + b[attr], 0);
+    return 1;
+}
 
   constructor(
     private apiSubmissionReportService: ApiSubmissionReportService,
@@ -54,57 +63,43 @@ export class ReportInventoryDraftComponent implements OnInit {
       })
     }) 
     statusData.push(rowData)
-    console.log(statusData)
     return statusData
-  }
-
-  createOrAppend(obj, key, value) {
-    if (obj.hasOwnProperty(key)) {
-      // Key exists, append the value
-      if (Array.isArray(obj[key])) {
-        obj[key].push(value);
-      } else {
-        obj[key] = [obj[key], value];
-      }
-    } else {
-      // Key does not exist, create a new key-value pair
-      obj[key] = value;
-    }
-    return obj
   }
 
   statusData(status){
-    let statusData  = [];
-    let maxLen        = 0;
-    let line_data    = {};
-    
+    let lineCode      = {}
     status.forEach((value,key)=>{
-      if(value.data.length > maxLen){
-        maxLen = value.data.length
-      }
-    })
-
-    let i = 0
-
-    while(i < maxLen){
-      let raw     = status[0]
-      statusData  = raw.data
-      let hour    = []
-      status.forEach((d,s)=>{
-        let a = {}
-        let orderId = 0
-        let minutes = 0
-        if (typeof d.data[i] !== 'undefined'){
-          orderId = (typeof d.data[i].order !== 'undefined') ? d.data[i].order : 0
-          minutes = (typeof d.data[i].minutes !== 'undefined') ? d.data[i].minutes : 0
-        }
-        a[orderId] = minutes
-        hour.push(a)
+      value.data.forEach((a,b)=>{
+        if(typeof lineCode[a.line_code] === "undefined"){
+          lineCode[a.line_code] = {
+            line: a.line,
+            ac_state: a.ac_state,
+            status_surveillance: a.status_surveillance,
+            mission_capable: a.mission_capable
+          }
+        } 
+        
       })
-      statusData[i]['hour'] = hour
-      i++
-    }
-    return statusData
+    })
+    
+    let hourlyData = []
+    Object.keys(lineCode).forEach((i,v)=>{
+      let hour = [];
+      
+      status.forEach((value,key)=>{
+        let obj = value.data.find(o => o.line_code === i);
+        hour.push({
+          hour: value.time,
+          minutes: (typeof obj !== "undefined") ? obj.minutes : 0
+        })
+      })
+      hourlyData.push({
+        line_code: i,
+        line_code_detail: lineCode[i],
+        hourly: hour
+      })
+    })
+    return hourlyData
   }
 
   reportData(data){
@@ -117,10 +112,7 @@ export class ReportInventoryDraftComponent implements OnInit {
         data: this.statusData(value.data)
       }
       report.push(reportData)
-      // console.log(value.data)
     })
-    // console.log(report)
-    // console.log(data)
     this.draftReport = report
   }
 

@@ -2,10 +2,14 @@
 <div *ngIf="dailyFields">
   <div class="row">
     <div class="col-8">
-      <div class="card">
+      <div class="card card-nco">
         <div class="card-body">
-          <table class="table table-bordered table-sm text-center">
+          <table class="table table-bordered table-sm text-center table-nco table-striped">
+            
             <thead>
+              <tr>
+                <th colspan="8">{{dailyFields.report_date | date:'d  MMMM  yyyy'}}</th>
+              </tr>
               <tr>
                 <th>Time</th>
                 <th>Line</th>
@@ -62,7 +66,10 @@
 
       <div class="d-grid mt-3">
         <div class="d-grid mt-2">
-          <div (click)="submitReport()" class="btn btn-primary">Submit Report</div>
+          <div class="btn-group">
+            <div (click)="submitReport('update')" class="btn btn-info">Update Report</div>
+            <div (click)="submitReport('submit')" class="btn btn-primary">Submit Report</div>
+          </div>
         </div>
       </div>
     </div>    
