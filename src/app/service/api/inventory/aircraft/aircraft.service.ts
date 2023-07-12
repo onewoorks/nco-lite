@@ -1,36 +1,37 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 import { HttpClient,HttpHeaders,HttpErrorResponse } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
-  baseUri: string = environment.appApiUrl
+export class ApiInventoryAircraftAircraftService {
+  baseUri: string = environment.appApiUrl + '/aircraft'
   headers = new HttpHeaders().set('Content-Type', 'application/json')
+  userrole: any = {}
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private localSt: LocalStorageService) {}
 
-  getAircraftTypes(){
-    return this.http.get(`${this.baseUri}/aircraft/types`)
+  getAircraftByRole(){
+    return this.http.get(`${this.baseUri}/filtered`)
   }
 
-  getAircraftById(id: String){
-    return this.http.get(`${this.baseUri}/aircraft/id/${id}`)
+  getAircraftTypesList(name: String){
+    const body = this.localSt.retrieve('uae')
+    return this.http.post(`${this.baseUri}/types/list`, body)
   }
 
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
-      // Get client-side error
       errorMessage = error.error.message;
     } else {
-      // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(errorMessage);
     return throwError(() => {
       return errorMessage;
     });

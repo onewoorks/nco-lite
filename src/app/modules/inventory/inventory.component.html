@@ -1,0 +1,17 @@
+<ng-container>
+    <div class="row">
+        <ng-container *ngFor="let item of list_of_inventories; let i = index" >
+            <a href="/inventory/aircraft">
+            <div class="col-4">
+                <div class="card text-center card-inventory-type">
+                    <div class="card-body">
+                        {{item.name}}
+                    </div>
+                </div>
+            </div>
+            </a>
+        </ng-container>
+        
+    </div>
+    
+</ng-container>

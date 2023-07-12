@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "https://nco-api.onewoorks.com",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

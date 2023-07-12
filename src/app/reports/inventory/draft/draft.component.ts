@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiSubmissionReportService } from 'src/app/service/api/submission_report/submission-report.service'
 import { ApiService } from 'src/app/service/api.service';
-import { SumPipe } from 'src/app/pipe/sum.pipe';
+import { SumPipe } from 'src/app/helpers/pipe/sum.pipe';
 
 @Component({
   selector: 'app-draft',
