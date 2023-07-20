@@ -13,9 +13,9 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getAircraftTypes(){
-    return this.http.get(`${this.baseUri}/aircraft/types`)
-  }
+  // getAircraftTypes(){
+  //   return this.http.get(`${this.baseUri}/aircraft/types`)
+  // }
 
   getAircraftById(id: String){
     return this.http.get(`${this.baseUri}/v1/asset-atms/${id}`)

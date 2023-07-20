@@ -14,14 +14,14 @@ export class TypesComponent implements OnInit {
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
-    this.readAircraftTypes()
+    // this.readAircraftTypes()
   }
 
-  readAircraftTypes(){
-    this.apiService.getAircraftTypes().subscribe((data) => {
-      this.AircraftTypes = data
-    })
-  }
+  // readAircraftTypes(){
+  //   this.apiService.getAircraftTypes().subscribe((data) => {
+  //     this.AircraftTypes = data
+  //   })
+  // }
 
   pickItem(value: string) {
     this.selectedItem.emit(value);
