@@ -10,7 +10,8 @@ import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title: String     = 'NCO Lite development';
+  title: String     = 'Network Centric Operations';
+  subtitle: String  = 'UNIFIED COMMAND & CONTROL'
   appApiUrl: String = environment.appApiUrl
   isLogged          = false
   userInfo          = {};

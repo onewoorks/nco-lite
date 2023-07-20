@@ -57,10 +57,15 @@
             </ng-container>
             <td *ngIf="ai === 0" [attr.rowspan]="draft.data.length">{{ draft.status }}</td>
             <td *ngIf="ai === 0" [attr.rowspan]="draft.data.length">
-              <ng-container *ngIf="draft.status !== 'submit'">
+              <ng-container *ngIf="draft.status === 'draft' || draft.status === 'reopen'">
                 <div class="btn btn-primary btn-sm btn-nco" (click)="updateReport(draft._id)">Update</div>
               </ng-container>
-              
+              <ng-container *ngIf="draft.status === 'submit' ">
+                <div class="btn btn-info btn-sm btn-nco" (click)="approveReport(draft._id)">Approve</div>
+              </ng-container>
+              <ng-container *ngIf="draft.status === 'approved' ">
+                <div class="btn btn-success btn-sm btn-nco" (click)="approveReport(draft._id)">View</div>
+              </ng-container>
             </td>
           </tr>
           

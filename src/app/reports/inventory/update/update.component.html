@@ -11,7 +11,6 @@
               </tr>
               <tr>
                 <th>Time</th>
-                <th>Linecode</th>
                 <th>Ac State</th>
                 <th>Status Surveillance</th>
                 <th>Mission Capable</th>
@@ -24,7 +23,6 @@
               <ng-container *ngFor="let time of dailyFields.data; let i = index">
                 <tr *ngFor="let hour of time.data; let a = index">
                   <td *ngIf="a === 0" [attr.rowspan]="time.data.length">{{ time.time }}</td>
-                  <td>{{ hour.line_code }}</td>
                   <td>{{ hour.ac_state }}</td>
                   <td>{{ hour.status_surveillance }}</td>
                   <td>{{ hour.mission_capable }}</td>
@@ -40,7 +38,6 @@
                     </div>
                   </td>
                   <td *ngIf="a === 0" [attr.rowspan]=time.data.length>
-                    {{time.data.length}}
                     <ng-container *ngIf="hour.minutes < 60">
                       <div class="btn btn-success btn-sm btn-nco" (click)="addNewRowHour(time,60 - hour.minutes)">
                         <i class="bi bi-plus-circle"></i>

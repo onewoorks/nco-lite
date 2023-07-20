@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ApiInventoryAircraftAircraftService } from 'src/app/service/api/inventory/aircraft/aircraft.service';
 
 @Component({
@@ -8,8 +9,10 @@ import { ApiInventoryAircraftAircraftService } from 'src/app/service/api/invento
 })
 export class SubheaderMenuComponent {
   listMainAsset: any = []
+  inventoryId: String
   constructor(
-    private apiAircraft: ApiInventoryAircraftAircraftService
+    private apiAircraft: ApiInventoryAircraftAircraftService,
+    private route: ActivatedRoute
   ){}
 
   ngOnInit(){

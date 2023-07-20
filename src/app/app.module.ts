@@ -23,6 +23,7 @@ import { SumPipeModule }      from './helpers/pipe/sum.pipe';
 import { ModulesInventoryComponent } from './modules/inventory/inventory.component';
 import { SubheaderComponent } from './shared/layout/subheader/subheader.component';
 import { SubheaderMenuComponent } from './shared/layout/subheader-menu/subheader-menu.component';
+import { ReportInventoryApproveComponent } from './reports/inventory/approve/approve.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SubheaderMenuComponent } from './shared/layout/subheader-menu/subheader
     InfoComponent,
     ModulesInventoryComponent,
     SubheaderComponent,
-    SubheaderMenuComponent
+    SubheaderMenuComponent,
+    ReportInventoryApproveComponent
   ],
   imports: [
     BrowserModule,

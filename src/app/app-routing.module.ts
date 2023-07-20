@@ -6,6 +6,7 @@ import { KeycloakService } from 'keycloak-angular';
 import { AircraftComponent } from './modules/inventory/aircraft/aircraft.component'
 import { ReportInventoryAircraftComponent } from './reports/inventory/aircraft/aircraft.component'
 import { ReportInventoryUpdateComponent } from './reports/inventory/update/update.component'
+import { ReportInventoryApproveComponent } from './reports/inventory/approve/approve.component'
 import { ReportInventoryDraftComponent } from './reports/inventory/draft/draft.component'
 import { ModulesInventoryComponent }      from './modules/inventory/inventory.component'
 import { LogoutComponent } from './auth/logout/logout.component'
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'inventory/:typeofaircraft', component:AircraftComponent},
   { path: 'reports/inventory/aircraft/:id', component: ReportInventoryAircraftComponent},
   { path: 'reports/inventory/update/:id', component: ReportInventoryUpdateComponent},
+  { path: 'reports/inventory/approve/:id', component: ReportInventoryApproveComponent},
   { path: 'reports/inventory/draft/:id', component: ReportInventoryDraftComponent}
 
 ];

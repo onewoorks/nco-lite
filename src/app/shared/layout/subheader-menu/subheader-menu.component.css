@@ -2,10 +2,10 @@
     border-top: 1px solid #444;
     border-left: 1px solid #444;
     background-color: #666F76;
-    min-width: 150px
+    min-width: 220px
 }
 .sub-menu-item:first-child {
-    border-left:none
+    /* border-left:none */
 }
 
 .sub-menu-item .active, .sub-menu-item .active a {

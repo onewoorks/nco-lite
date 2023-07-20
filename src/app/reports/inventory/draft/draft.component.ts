@@ -52,6 +52,11 @@ export class ReportInventoryDraftComponent implements OnInit {
     window.location.href = `reports/inventory/update/${draft_id}`
   }
 
+  approveReport(draft_id: string){
+    window.location.href = `reports/inventory/approve/${draft_id}`
+  }
+
+
   statusData(status){
     let lineCode      = {}
     status.forEach((value,key)=>{

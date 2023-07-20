@@ -1,9 +1,16 @@
 <div class="topmenu">
     <nav class="navbar navbar-nco bg-body-tertiary m-0">
       <div class="container-fluid" style="color:#fff">
-        <a class="navbar-brand" href="/">
-          <i class="bi bi-house"></i> {{ title }}
-        </a>
+        <div class="main-header">
+            <a class="navbar-brand" href="/">
+              <img src="/assets/images/icons/atm.png" class="img-fluid app-logo"> 
+            </a>
+            <div class="header-title">
+              <h1>{{ title }}</h1>
+              <h3>{{ subtitle }}</h3>
+            </div>
+        </div>
+        
         <div class="text-end">
           <ng-container *ngIf="userInfo">
             <div>{{ userInfo.name }} ({{ userInfo.role }})</div>

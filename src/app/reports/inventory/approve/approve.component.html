@@ -1,0 +1,53 @@
+<app-info [inventoryDetail]="inventoryDetail"></app-info>
+<div *ngIf="dailyFields">
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-nco">
+        <div class="card-body">
+          <table class="table table-bordered table-sm text-center table-nco table-striped">            
+            <thead>
+              <tr>
+                <th colspan="8">{{dailyFields.report_date | date:'d  MMMM  yyyy'}}</th>
+              </tr>
+              <tr>
+                <th>Time</th>
+                <th>Ac State</th>
+                <th>Status Surveillance</th>
+                <th>Mission Capable</th>
+                <th>Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let time of dailyFields.data; let i = index">
+                <tr *ngFor="let hour of time.data; let a = index">
+                  <td *ngIf="a === 0" [attr.rowspan]="time.data.length">{{ time.time }}</td>
+                  <td>{{ hour.ac_state }}</td>
+                  <td>{{ hour.status_surveillance }}</td>
+                  <td>{{ hour.mission_capable }}</td>
+                  <td>{{ hour.minutes }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+            
+          </table>
+        </div>
+      </div>
+
+    </div>  
+  </div>
+
+  <div class="row">
+    <div class="d-grid mt-3">
+        <div class="d-grid mt-2">
+          <div class="btn-group btn-group-sm">
+            <div (click)="goback()" class="btn btn-danger">Back</div>
+            <ng-container *ngIf="dailyFields.status !== 'approved'">
+                <div (click)="submitReport('reopen')" class="btn btn-info">Reopen Report</div>
+                <div (click)="submitReport('approved')" class="btn btn-primary">Approve Report</div>
+            </ng-container>
+            
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
