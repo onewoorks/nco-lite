@@ -73,6 +73,29 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "vpn": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.vpn.ts"
+                }
+              ],
+              "optimization": false,
+              "outputHashing": "all",
+              "sourceMap": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
@@ -87,6 +110,9 @@
             },
             "dev": {
               "browserTarget": "nco-lite:build:dev"
+            },
+            "vpn": {
+              "browserTarget": "nco-lite:build:vpn"
             }
           }
         },

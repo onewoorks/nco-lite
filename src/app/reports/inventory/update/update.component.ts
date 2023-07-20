@@ -31,7 +31,6 @@ export class ReportInventoryUpdateComponent implements OnInit {
   ngOnInit() {
     this.draftId = this.route.snapshot.paramMap.get('id')
     this.getDraftReport()
-    
   }
 
   getInventoryDetail(){
@@ -64,25 +63,25 @@ export class ReportInventoryUpdateComponent implements OnInit {
   }
 
   deleteRowHour(data, time){
-    let hourData = this.dailyFields['data'].find(obj => obj.time === time);
-    let hourDataStatus = hourData.data
-    let updatedData = hourDataStatus.filter(obj => obj.order !== data.order);
-    hourData.data = updatedData
+    let hourData        = this.dailyFields['data'].find(obj => obj.time === time);
+    let hourDataStatus  = hourData.data
+    let updatedData     = hourDataStatus.filter(obj => obj.order !== data.order);
+    hourData.data       = updatedData
   }
 
-  addNewRowHour(data){
+  addNewRowHour(data,balanceMinutes){
     let hourData = data
     let index       = this.dailyFields['data'].findIndex(obj => obj.order === hourData.order)
     let orderData   = this.dailyFields['data'][index].data
     let lastOrder   = this.latestOrder(orderData)
     let rowData = {
-      line: lastOrder.line,
-      ac_state: lastOrder.ac_state,
-      status_surveillance: lastOrder.status_surveillance,
-      mission_capable: lastOrder.mission_capable,
-      minutes: 0,
-      order: lastOrder.order+1,
-      line_code: `${lastOrder.line}${lastOrder.ac_state}${lastOrder.status_surveillance}${lastOrder.mission_capable}`.replace(/ /g,'_')
+      line:                 lastOrder.line,
+      ac_state:             lastOrder.ac_state,
+      status_surveillance:  lastOrder.status_surveillance,
+      mission_capable:      lastOrder.mission_capable,
+      minutes:              balanceMinutes,
+      order:                lastOrder.order+1,
+      line_code:            `${lastOrder.ac_state}_${lastOrder.status_surveillance}_${lastOrder.mission_capable}`.replace(/ /g,'_')
     }
     if (index !== -1) {
       this.dailyFields['data'][index].data.push(rowData);
@@ -99,34 +98,33 @@ export class ReportInventoryUpdateComponent implements OnInit {
   submitReport(reportStatus){
     let report        = this.dailyFields
     report['status']  = reportStatus
-    // this.apiSubmissionReportService
-    //   .seacrhReportByDate(report['inventory_id'], report['report_date'], '2023-06-31')
-    //   .subscribe((data)=>{
-    //     console.log(data)
-    //   })
     this.apiSubmissionReportService.updateReport(report)
     window.location.href = `/reports/inventory/draft/${report['inventory_id']}`
   }
 
   updateData(){
-    let dDate           = this.dailyFields['data']
-    let currentPick     = this.rowPick
-    let a               = dDate[currentPick]['data']
-    let newData         = a.find(o => o.order === this.rowStatusOrderPick);
+    let dDate             = this.dailyFields['data']
+    let currentPick       = this.rowPick
+    let a                 = dDate[currentPick]['data']
+    let newData           = a.find(o => o.order === this.rowStatusOrderPick);
+    newData['line_code']  = `${newData.ac_state}_${newData.status_surveillance}_${newData.mission_capable}`
     dDate.forEach((value,key)=>{
       if(key > currentPick){
         let hourData = {
-          line: newData['line'],
-          ac_state: newData['ac_state'],
-          status_surveillance: newData['status_surveillance'],
-          mission_capable: newData['mission_capable'],
-          minutes: 60,
-          order: this.rowStatusOrderPick,
-          line_code: `${newData['line']}${newData['ac_state']}${newData['status_surveillance']}${newData['mission_capable']}`.replace(/ /g,'_')
+          line:                 newData['line'],
+          ac_state:             newData['ac_state'],
+          status_surveillance:  newData['status_surveillance'],
+          mission_capable:      newData['mission_capable'],
+          minutes:              60,
+          order:                this.rowStatusOrderPick,
+          line_code:            `${newData['ac_state']}_${newData['status_surveillance']}_${newData['mission_capable']}`.replace(/ /g,'_')
         }
         this.dailyFields['data'][key]['data'] = [hourData]
       }
     })
-    // console.log(this.dailyFields)
+  }
+
+  goback(){
+    window.location.href = `reports/inventory/draft/${this.dailyFields['inventory_id']}`
   }
 }

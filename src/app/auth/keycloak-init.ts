@@ -1,15 +1,12 @@
 import { KeycloakService } from "keycloak-angular";
+import { environment } from 'src/environments/environment';
 
 export function initializeKeycloak(
   keycloak: KeycloakService
   ) {
     return () =>
       keycloak.init({
-        config: {
-          url: 'http://localhost:8081/',
-          realm: 'master',
-          clientId: 'nco-lite',
-        },
+        config: environment.keycloak,
         // loadUserProfileAtStartUp: true,
         initOptions: {
           onLoad: 'login-required',

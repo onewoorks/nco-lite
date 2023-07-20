@@ -1,16 +1,20 @@
-
-  <div class="topmenu">
+<div class="topmenu">
     <nav class="navbar navbar-nco bg-body-tertiary m-0">
       <div class="container-fluid" style="color:#fff">
         <a class="navbar-brand" href="/">
           <i class="bi bi-house"></i> {{ title }}
         </a>
-        <a href="/logout" >Logout</a>
+        <div class="text-end">
+          <ng-container *ngIf="userInfo">
+            <div>{{ userInfo.name }} ({{ userInfo.role }})</div>
+            <div>{{ userInfo.currentUnit }} - <a href="/logout" >Logout</a></div>
+          </ng-container>
+          
+        </div>
+        
       </div>
     </nav>
+    <app-subheader id="submenu"></app-subheader>
   </div>
-  <br>
-  <br>
-  <br>
-  <br>
+  
   <router-outlet></router-outlet>

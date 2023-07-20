@@ -16,7 +16,7 @@ export class InventoryService {
     private localSt: LocalStorageService) {}
 
   getInventories(){
-    const uae = this.localSt.retrieve('uae')
+    const uam = this.localSt.retrieve('uam')
     return this.http.get(`${this.baseUri}/inventory/lists`)
   }
 

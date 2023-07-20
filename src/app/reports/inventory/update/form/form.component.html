@@ -20,7 +20,8 @@
 <div class="card card-nco">
   <div class="card-body">
     <form [formGroup]="timeDataStatusForm">
-      <div class="row mb-2">
+      
+      <div class="row mb-2 d-none">
         <label for="line" class="col-sm-5 col-form-label">Line</label>
         <div class="col-sm-7">
           <select formControlName="line" #line class="form-select form-select-sm" id="line" (change)="timeStatusData('line',line.value)">
@@ -51,7 +52,7 @@
         <label for="mission_capable" class="col-sm-5 col-form-label">Mission Capable</label>
         <div class="col-sm-7">
           <select formControlName="mission_capable" #missionCapable class="form-select form-select-sm" id="mission_capable" (change)="timeStatusData('mission_capable', missionCapable.value)">
-            <option *ngFor="let missionCapable of selectMissionCapable">{{ missionCapable.abbr }}</option>
+            <option *ngFor="let missionCapable of selectMissionCapable" [value]="missionCapable.abbr">{{ missionCapable.abbr }}</option>
           </select>
         </div>
       </div>
@@ -65,6 +66,17 @@
 
         </div>
       </div>
+
+      <div class="row mb-2">
+        <label for="line_code" class="col-sm-5 col-form-label">Line Code</label>
+        <div class="col-sm-7">
+          <input type="text" 
+          formControlName="line_code" #lineCode class="form-control form-control-sm" 
+          id="line_code" 
+          [value]="line.line_code" />
+        </div>
+      </div>
+      
     </form>
   </div>
 </div>

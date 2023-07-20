@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { KeycloakService } from 'keycloak-angular';
-import { KeycloakProfile } from 'keycloak-js';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 
@@ -13,7 +12,8 @@ import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 export class AppComponent {
   title: String     = 'NCO Lite development';
   appApiUrl: String = environment.appApiUrl
-  isLogged = false
+  isLogged          = false
+  userInfo          = {};
 
   constructor(
     private keycloakService: KeycloakService,
@@ -24,17 +24,32 @@ export class AppComponent {
   async ngOnInit() {
     this.isLogged = await this.keycloakService.isLoggedIn();
     if(this.isLogged){
-      this.userProfile()
+      await this.userProfile()
+      this.userInfo = this.localSt.retrieve('userinfo');
+    } else {
+      this.localSt.clear('userinfo');
     }
+    
   }
 
-  
   async userProfile(){
     let userDetails = await this.keycloakService.loadUserProfile();
     this.authService
-      .getUserRoles(userDetails.username)
+      .getUserInformation(userDetails)
       .subscribe((data)=>{
-        this.localSt.store('uae', data);
+        this.getUserRoles(data)
+        this.localSt.store('userinfo', data);
+      })
+  }
+
+  getUserRoles(user: any){
+    this.authService
+      .getUserRoles(user.id)
+      .subscribe((data)=>{
+        const userRole = data[0]
+        this.localSt.store('uam', userRole.refRoleDesc);
+        user.role =  userRole.refRoleDesc
+        this.localSt.store('userinfo', user);
       })
   }
 

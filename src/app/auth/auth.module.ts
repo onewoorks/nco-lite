@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LogoutComponent } from './logout/logout.component';
+import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 
 
 
@@ -12,4 +13,9 @@ import { LogoutComponent } from './logout/logout.component';
     CommonModule
   ]
 })
-export class AuthModule { }
+export class AuthModule {
+
+  getUser(){
+    return 'user'
+  }
+ }

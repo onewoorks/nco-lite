@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiInventoryAircraftAircraftService } from 'src/app/service/api/inventory/aircraft/aircraft.service';
+import { LocalStorageService } from 'ngx-webstorage'
 
 @Component({
   selector: 'app-aircraft',
@@ -9,14 +10,19 @@ import { ApiInventoryAircraftAircraftService } from 'src/app/service/api/invento
 })
 export class AircraftComponent implements OnInit {
   @Input() activate: any;
+  aircraftGroup: any;
   aircraftType: any = [];
+  inventoryByCategory: any = [];
+  loggedUser: any;
+
   constructor(
     private inventoryAircraft: ApiInventoryAircraftAircraftService,
-    private activatedroute:ActivatedRoute) { }
+    private localSt: LocalStorageService,
+    private route:ActivatedRoute) { }
 
   ngOnInit() {
-    this.getDefaultAircraftTypeList('Angkut')
-    // console.log(this.activate)
+    this.aircraftGroup = this.route.snapshot.paramMap.get('typeofaircraft')
+    this.getInventoryByCategory();
   }
 
   onTypeSelected(eventData:string){
@@ -30,4 +36,9 @@ export class AircraftComponent implements OnInit {
     })
   }
 
+  getInventoryByCategory(){
+    this.inventoryAircraft.getAircraftByCategory(this.aircraftGroup).subscribe((data) => {
+      this.aircraftType = data
+    })
+  }
 }

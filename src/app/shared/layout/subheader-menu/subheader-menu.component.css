@@ -1,0 +1,20 @@
+.sub-menu-item {
+    border-top: 1px solid #444;
+    border-left: 1px solid #444;
+    background-color: #666F76;
+    min-width: 150px
+}
+.sub-menu-item:first-child {
+    border-left:none
+}
+
+.sub-menu-item .active, .sub-menu-item .active a {
+    background-color: #fff;
+    color: #444
+}
+
+.sub-menu {
+    color: #fff;
+    text-transform: uppercase;
+    padding: 6px 2px
+}

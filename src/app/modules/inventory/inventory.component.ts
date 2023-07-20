@@ -14,7 +14,7 @@ export class ModulesInventoryComponent {
     ){}
 
   ngOnInit() {
-    this.getAllInventories()
+    // this.getAllInventories()
   }
 
   getAllInventories() {

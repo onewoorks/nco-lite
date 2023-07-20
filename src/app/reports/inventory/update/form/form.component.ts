@@ -21,8 +21,6 @@ export class FormComponent implements OnInit {
   selectedValueData: any
   timeDataStatusForm: FormGroup
 
-
-
   constructor(
     private apiRefsService: RefsService,
     private formBuilder: FormBuilder
@@ -39,7 +37,8 @@ export class FormComponent implements OnInit {
       ac_state: [null],
       mission_capable: [null],
       status_surveillance: [null],
-      minutes: 0
+      minutes: 0,
+      line_code: null
     })
   }
 
@@ -48,12 +47,14 @@ export class FormComponent implements OnInit {
   }
 
   setFormValues(data){
-    this.timeDataStatusForm = this.formBuilder.group({
-      line: data.line,
-      ac_state: data.ac_state,
-      status_surveillance: data.status_surveillance,
-      mission_capable: data.mission_capable,
-      minutes: data.minutes,
+    this.selectMissionCapable = this.findMCbyAcState('abbr', data.ac_state)
+    this.timeDataStatusForm   = this.formBuilder.group({
+      line:                 data.line,
+      ac_state:             data.ac_state,
+      status_surveillance:  data.status_surveillance,
+      mission_capable:      data.mission_capable,
+      minutes:              data.minutes,
+      line_code:            data.line_code
     })
   }
 
@@ -61,17 +62,18 @@ export class FormComponent implements OnInit {
     let statusItems = data.currentValue
     let statusData  = []
     if(typeof statusItems !== 'undefined'){
-      this.setFormValues(statusItems)
       for (const key in statusItems) {
         if (statusItems.hasOwnProperty(key)) {
           statusData.push({
-            status: key.toString().replace("_"," "),
+            // status: key.toString().replace("_"," "),
+            status: key,
             value: statusItems[key]
           })
         }
       }
-      this.inventoryFormat = statusData
-      this.selectedValueData = statusItems
+      this.inventoryFormat    = statusData
+      this.selectedValueData  = statusItems
+      this.setFormValues(statusItems)
     }
     
   }
@@ -95,14 +97,33 @@ export class FormComponent implements OnInit {
   }
 
   getSelectMissionCapable(){
-    this.apiRefsService.getList('aircraft','mission_capable').subscribe((data)=>{
-      this.selectMissionCapable = data
-    })
+    this.selectMissionCapable = []
   }
 
   timeStatusData(statusName, value){
     let statusData          = this.selectedValueData
-    statusData[statusName]  = value
+    if(statusName === 'ac_state'){
+      let result = this.findMCbyAcState('abbr', value);
+      this.selectMissionCapable = result
+      this.timeDataStatusForm = this.formBuilder.group({
+        mission_capable:      result[0]['abbr'],
+        ac_state:             value,
+        status_surveillance:  statusData.status_surveillance,
+        minutes:              statusData.minutes,
+        line_code:            `${value}_${statusData.status_surveillance}_${result[0]['abbr']}`
+      })
+      statusData['mission_capable'] = result[0]['abbr']
+    } 
+    statusData[statusName]  = value    
     this.updateReportData.emit()
+  }
+
+  findMCbyAcState(key, value) {
+    let mc_data = this.selectAcState.find((item) => item[key] === value);
+    let mc_data_new = []
+    mc_data.mission_capable.forEach((v,k)=>{
+      mc_data_new.push({abbr: v})
+    })
+    return mc_data_new;
   }
 }

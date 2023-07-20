@@ -101,14 +101,18 @@ background-color: #23120B
 }
 
 .topmenu {
-    position: fixed;
+    /* position: fixed; */
     width: 100%;
     z-index: 10;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     left:0;
-    height: 60px;
 }
 
 a {
-    color: #fff
+    color: #fff;
+    text-decoration: none
+}
+a:hover {
+    color: #fff;
+    font-weight: bold;
 }

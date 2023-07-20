@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ApiService {
-  baseUri: string = environment.appApiUrl
+  baseUri: string = environment.api.rms_asset
   headers = new HttpHeaders().set('Content-Type', 'application/json')
 
   constructor(private http: HttpClient) {}
@@ -18,7 +18,7 @@ export class ApiService {
   }
 
   getAircraftById(id: String){
-    return this.http.get(`${this.baseUri}/aircraft/id/${id}`)
+    return this.http.get(`${this.baseUri}/v1/asset-atms/${id}`)
   }
 
   errorMgmt(error: HttpErrorResponse) {

@@ -12,8 +12,8 @@ import { LogoutComponent } from './auth/logout/logout.component'
 
 const routes: Routes = [
   { path: '', component:ModulesInventoryComponent},
-  { path: 'inventory/aircraft', component:AircraftComponent},
   { path: 'logout', component:LogoutComponent},
+  { path: 'inventory/:typeofaircraft', component:AircraftComponent},
   { path: 'reports/inventory/aircraft/:id', component: ReportInventoryAircraftComponent},
   { path: 'reports/inventory/update/:id', component: ReportInventoryUpdateComponent},
   { path: 'reports/inventory/draft/:id', component: ReportInventoryDraftComponent}

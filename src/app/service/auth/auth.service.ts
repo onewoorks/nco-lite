@@ -8,17 +8,19 @@ import { environment } from 'src/environments/environment';
 })
 
 export class AuthService {
-  baseUri: string = environment.appApiUrl
+  baseUri: string = environment.api.uam
+  baseUri_dev: string = environment.appApiUrl
   headers = new HttpHeaders().set('Content-Type', 'application/json')
 
   constructor(
     private http: HttpClient) {}
 
-  getUserRoles(role: String){
-    const body = {
-      userrole: role
-    }
-    return this.http.post(`${this.baseUri}/auth/role`, body)
+  getUserInformation(user: any){
+    return this.http.get(`${this.baseUri_dev}/auth/user/${user.username}`)
+  }
+
+  getUserRoles(userid: String){
+    return this.http.get(`${this.baseUri}/v1/users/${userid.toLowerCase()}/user-roles`)
   }
 
   errorMgmt(error: HttpErrorResponse) {

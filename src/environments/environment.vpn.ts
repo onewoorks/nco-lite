@@ -2,15 +2,10 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-// export const environment = {
-//   production: false,
-//   appApiUrl: 'http://localhost:8000/api',
-//   keycloak: {
-//     url: 'https://login.mafc2.mil.my/auth',
-//     realm: 'nco',
-//     clientId: 'laptop-rir',
-//   }
-// };
+export interface Api {
+  uam? : String,
+  rms_asset? : String
+}
 
 export const environment = {
   production: false,
@@ -22,14 +17,14 @@ export const environment = {
   // },
   keycloak: {
     url: 'https://login.mafc2.mil.my/auth/',
-    realm: 'NCO',
+    realm: 'nco',
     clientId: 'nco-lite-v2',
   },
   api: {
-    uam: 'https://app.mafc2.mil.my/uam/v1/users'
+    uam: 'https://development-nco.mafc2.mil.my/api/uam',
+    rms_asset: 'https://development-nco.mafc2.mil.my/api/rms-asset' 
   }
 };
-
 
 /*
  * For easier debugging in development mode, you can import the following file

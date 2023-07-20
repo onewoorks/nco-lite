@@ -17,10 +17,11 @@ export class ReportInventoryDraftComponent implements OnInit {
   inventoryDetail: any
   theDate = new Date();
 
-  transform(items: any, attr: string): any {
-    let totalhour = items.reduce((a, b) => a + b[attr], 0);
-    return 1;
-}
+
+//   transform(items: any, attr: string): any {
+//     let totalhour = items.reduce((a, b) => a + b[attr], 0);
+//     return 1;
+// }
 
   constructor(
     private apiSubmissionReportService: ApiSubmissionReportService,
@@ -30,19 +31,19 @@ export class ReportInventoryDraftComponent implements OnInit {
 
   ngOnInit() {
     this.inventory_id = this.route.snapshot.paramMap.get('id')
-    this.renderReportSubmission()
     this.getInventoryDetail()
+    
   }
 
   getInventoryDetail(){
     this.apiService.getAircraftById(this.inventory_id).subscribe((data)=> {
       this.inventoryDetail = data
+      this.renderReportSubmission()
     })
   }
 
   renderReportSubmission(){
-    this.apiSubmissionReportService.getDraftReportInventory(this.inventory_id).subscribe((data) => {
-      // this.draftReport = data
+    this.apiSubmissionReportService.getDraftReportInventory(this.inventoryDetail).subscribe((data) => {
       this.reportData(data)
     })
   }
@@ -51,46 +52,32 @@ export class ReportInventoryDraftComponent implements OnInit {
     window.location.href = `reports/inventory/update/${draft_id}`
   }
 
-  statusDataA(status: any[]){
-    let statusData  = []
-    let rowData = []
-    status.forEach((value, key)=>{
-      rowData.push({
-        line: value.data[0].line,
-        ac_state: value.data[0].ac_state,
-        status_surveillance: value.data[0].status_surveillance,
-        mission_capable: value.data[0].mission_capable
-      })
-    }) 
-    statusData.push(rowData)
-    return statusData
-  }
-
   statusData(status){
     let lineCode      = {}
     status.forEach((value,key)=>{
+      
       value.data.forEach((a,b)=>{
+        
         if(typeof lineCode[a.line_code] === "undefined"){
           lineCode[a.line_code] = {
-            line: a.line,
             ac_state: a.ac_state,
             status_surveillance: a.status_surveillance,
-            mission_capable: a.mission_capable
+            mission_capable: a.mission_capable,
+            line_code: a.line_code,
+            timestamp: a.timestamp
           }
-        } 
-        
+        }    
       })
     })
     
-    let hourlyData = []
+    let hourlyData    = []
     Object.keys(lineCode).forEach((i,v)=>{
       let hour = [];
-      
       status.forEach((value,key)=>{
         let obj = value.data.find(o => o.line_code === i);
         hour.push({
           hour: value.time,
-          minutes: (typeof obj !== "undefined") ? obj.minutes : 0
+          minutes: (typeof obj !== "undefined") ? parseInt(obj.minutes) : 0
         })
       })
       hourlyData.push({
@@ -103,17 +90,21 @@ export class ReportInventoryDraftComponent implements OnInit {
   }
 
   reportData(data){
-    let report = []
-    data.forEach((value, key)=>{
-      let reportData = {
-        _id: value._id,
-        status: value.status,
-        report_date: value.report_date,
-        data: this.statusData(value.data)
-      }
-      report.push(reportData)
-    })
-    this.draftReport = report
+    if(data !== null){
+      let report = []
+      data.forEach((value, key)=>{
+        let reportData = {
+          _id: value._id,
+          status: value.status,
+          report_date: value.report_date,
+          data: this.statusData(value.data)
+        }
+        report.push(reportData)
+      })
+      this.draftReport = report
+    } else {
+      window.location.reload()
+    }
+    
   }
-
 }

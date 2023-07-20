@@ -21,6 +21,8 @@ import { ReportInventoryDraftComponent } from './reports/inventory/draft/draft.c
 import { InfoComponent }      from './modules/inventory/aircraft/info/info.component';
 import { SumPipeModule }      from './helpers/pipe/sum.pipe';
 import { ModulesInventoryComponent } from './modules/inventory/inventory.component';
+import { SubheaderComponent } from './shared/layout/subheader/subheader.component';
+import { SubheaderMenuComponent } from './shared/layout/subheader-menu/subheader-menu.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { ModulesInventoryComponent } from './modules/inventory/inventory.compone
     FormComponent,
     ReportInventoryDraftComponent,
     InfoComponent,
-    ModulesInventoryComponent
+    ModulesInventoryComponent,
+    SubheaderComponent,
+    SubheaderMenuComponent
   ],
   imports: [
     BrowserModule,

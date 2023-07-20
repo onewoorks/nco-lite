@@ -13,8 +13,12 @@ export class ApiSubmissionReportService {
 
   constructor(private http: HttpClient) {}
 
-  getDraftReportInventory(id: string){
-    return this.http.get(`${this.baseUri}/report/submission/draft/inventory/${id}`)
+  getDraftReportInventory(inventoryDetail: any){
+    const body = {
+      id: inventoryDetail.id,
+      inventoryType: inventoryDetail.astNavyCategoryDesc.toLowerCase(),
+    }
+    return this.http.post(`${this.baseUri}/report/submission/draft/inventory`, body)
   } 
 
   getDraftReport(id: string){

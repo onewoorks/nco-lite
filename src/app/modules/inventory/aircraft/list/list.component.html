@@ -2,28 +2,26 @@
   <table class="table table-bordered table-sm text-center table-nco table-striped">
     <thead>
       <tr>
+        <th>No</th>
         <th class='text-center'>Tail Number</th>
         <th class='text-center'>Aircraft Type</th>
-        <th class='text-center'>Line</th>
-        <th class='text-center'>Ac State(Serv/IS)</th>
-        <th class='text-center'>Status Surveillance</th>
+        <th class='text-center'>Squadron</th>
+        <th class='text-center'>Airbase</th>
         <th class='text-center'>Update Record</th>
-        <th class='text-center'>Submission Status</th>
         <th class='text-center'>Report Monthly</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of listItems; let i = index">
-        <td class="text-center">{{ item.tail_number }}</td>
-        <td class="text-center">{{ item.kategori_asset }}</td>
-        <td>{{ item.markas }}</td>
-        <td>{{ item.pangkalan }}</td>
-        <td>{{ item.squadron }}</td>
+        <td>{{ i+1 }}</td>
+        <td class="text-center">{{ item.regNo }}</td>
+        <td class="text-center">{{ item.astNavyCategoryDesc }}</td>
+        <td>{{ item.unitCommandHqAtmDesc }}</td>
+        <td>{{ item.regionDesc }}, {{ item.commandHqDesc}}</td>
         <td class="text-center">
-          <div class="btn btn-primary btn-sm btn-nco" (click)="addReport(item._id)">Add Report</div></td>
-        <td></td>
+          <div class="btn btn-primary btn-sm btn-nco" (click)="addReport(item.id)">Add Report</div></td>
         <td class="text-center">
-          <div class='btn btn-primary btn-sm btn-nco' (click)="itemReport(item._id)">View</div>
+          <div class='btn btn-primary btn-sm btn-nco' (click)="itemReport(item.id)">View</div>
         </td>
       </tr>
     </tbody>
